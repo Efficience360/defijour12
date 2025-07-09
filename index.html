@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jour 12 – Célébration cosmique</title>
+  
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: rgba(44,0,62,0.9);
+    color: #f8f4ff;
+    padding: 20px;
+  }
+  .module-day {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #ff69b4;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px rgba(255,105,180,0.5);
+    color: #fff;
+  }
+  .module-day img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: cover;
+  }
+  .module-day h2 {
+    margin-top: 0;
+    color: #ffe1f2;
+    text-shadow: 0 0 4px #ff69b4;
+  }
+  .module-day p {
+    color: #ffd1e6;
+    margin-bottom: 15px;
+  }
+  .module-day .tips {
+    background: rgba(0,0,0,0.2);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  .module-day .tips h3 {
+    margin: 0 0 8px;
+    font-size: 1em;
+    color: #ffb3dc;
+  }
+  .module-day .tips ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style: disc inside;
+    color: #fff;
+  }
+  .module-day textarea {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid #ffb3dc;
+    border-radius: 8px;
+    color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  .btn-done {
+    background: #27AE60;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 6px #27AE60;
+    transition: transform 0.2s;
+  }
+  .btn-done.done {
+    background: #ccc;
+    color: #666;
+    box-shadow: none;
+    cursor: default;
+    transform: none;
+  }
+  .btn-done:hover:not(.done) {
+    transform: scale(1.05);
+  }
+</style>
+
+</head>
+<body>
+  <div class="module-day">
+    <img src="https://via.placeholder.com/600x200?text=Jour+12" alt="Jour 12">
+    <h2 id="title-12">Jour 12 – Célébration cosmique</h2>
+    <p>Relis ton parcours, célèbre chaque victoire et fixe la prochaine étape.</p>
+    <div class="tips">
+      <h3>Conseils :</h3>
+      <ul>
+<li>Liste chaque jour accompli.</li>
+<li>Ressens la fierté.</li>
+<li>Fixe un nouveau cap.</li>
+</ul>
+    </div>
+    <textarea id="journal-12" placeholder="Écris ici ton ressenti..."></textarea>
+    <button class="btn-done" id="btn-12">Marquer comme fait</button>
+  </div>
+  
+<script>
+  const day = 12;
+  const titleElem = document.getElementById('title-' + day);
+  const ta = document.getElementById('journal-' + day);
+  const btn = document.getElementById('btn-' + day);
+  const data = JSON.parse(localStorage.getItem('defi12-' + day) || '{}');
+  if (data.done) {
+    btn.classList.add('done');
+    btn.textContent = 'Fait ✅';
+    titleElem.textContent += ' ✅';
+  }
+  if (data.journal) {
+    ta.value = data.journal;
+  }
+  ta.addEventListener('input', () => save(day, ta.value, data.done));
+  btn.addEventListener('click', () => {
+    if (btn.classList.contains('done')) return;
+    btn.classList.add('done');
+    btn.textContent = 'Fait ✅';
+    titleElem.textContent += ' ✅';
+    save(day, ta.value, true);
+  });
+  function save(d, journal, done) {
+    localStorage.setItem('defi12-' + d, JSON.stringify({journal: journal, done: done}));
+  }
+</script>
+
+</body>
+</html>
